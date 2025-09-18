@@ -2,8 +2,8 @@
 
 This repository contains the code for an image generation application themed as a Tinder photo generator. This project is for educational purposes and accompanies a tutorial on YouTube.
 
-**YouTube Tutorial:** https://youtu.be/WLuYhBesLiI
-**Live Application:** tinder-image-gen.app
+- **YouTube Tutorial:** https://youtu.be/WLuYhBesLiI
+- **Live Application:** tinder-image-gen.app
 
 ## Purpose
 
