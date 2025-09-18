@@ -298,18 +298,6 @@ wheels = [
 ]
 
 [[package]]
-name = "mailerlite-python"
-version = "0.1.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "requests" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/4e/e6/1e31d0711656dd45a5173b5a742b9114c59ab0b3ea44cf56c1a5e5f65511/mailerlite_python-0.1.2.tar.gz", hash = "sha256:f88764cf1662753df030a2b27cd137ea33fe9f5d969c96e827823f0b682a8f7e", size = 3611 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/10/b4/70519551053116f340fdccbe90c5d5f5eea6fed421bce9f758f49d0ddf32/mailerlite_python-0.1.2-py3-none-any.whl", hash = "sha256:c5448944ca885e2397877fcd089fd8998495e9ef5ccc3ca798fbb8f4c1f3be25", size = 4680 },
-]
-
-[[package]]
 name = "markupsafe"
 version = "3.0.2"
 source = { registry = "https://pypi.org/simple" }
@@ -995,7 +983,6 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "google-genai" },
-    { name = "mailerlite-python" },
     { name = "python-dotenv" },
     { name = "streamlit" },
 ]
@@ -1003,7 +990,6 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "google-genai", specifier = ">=1.38.0" },
-    { name = "mailerlite-python", specifier = ">=0.1.2" },
     { name = "python-dotenv", specifier = ">=1.1.1" },
     { name = "streamlit", specifier = ">=1.49.1" },
 ]

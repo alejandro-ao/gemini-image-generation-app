@@ -4,22 +4,40 @@ import os
 from google import genai
 from io import BytesIO
 import re
-from mailerlite.client import Client
+import requests
+import logging
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def add_to_mailerlite(email):
     try:
         mailerlite_api_key = st.secrets["MAILERLITE_API_KEY"]
         mailerlite_group_id = st.secrets["MAILERLITE_GROUP_ID"]
-        
-        client = Client({
-            "api_key": mailerlite_api_key
-        })
-        
-        client.subscribers.create(email, resubscribe=True, groups=[mailerlite_group_id])
+        logging.info(f"Attempting to subscribe {email} to group {mailerlite_group_id}")
+
+        url = "https://connect.mailerlite.com/api/subscribers"
+        headers = {
+            "Authorization": f"Bearer {mailerlite_api_key}",
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+        data = {
+            "email": email,
+            "groups": [str(mailerlite_group_id)],
+            "resubscribe": True
+        }
+
+        response = requests.post(url, headers=headers, json=data)
+        response.raise_for_status()  # Raise an exception for bad status codes
+
         st.success("You have been subscribed!")
+        logging.info(f"Successfully subscribed {email}")
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error subscribing {email}: {e}", exc_info=True)
+        st.error(f"An error occurred while subscribing: {e.response.text}")
     except Exception as e:
-        st.error(f"An error occurred while subscribing: {e}")
+        logging.error(f"An unexpected error occurred: {e}", exc_info=True)
+        st.error("An unexpected error occurred while subscribing.")
 
 
 def is_valid_email(email):
