@@ -14,8 +14,12 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 def add_to_mailerlite(email):
     try:
-        mailerlite_api_key = st.secrets["MAILERLITE_API_KEY"]
-        mailerlite_group_id = st.secrets["MAILERLITE_GROUP_ID"]
+        mailerlite_api_key = os.getenv("MAILERLITE_API_KEY")
+        mailerlite_group_id = os.getenv("MAILERLITE_GROUP_ID")
+        if not mailerlite_api_key or not mailerlite_group_id:
+            logging.error("MAILERLITE_API_KEY or MAILERLITE_GROUP_ID not found in environment variables")
+            st.error("MAILERLITE_API_KEY or MAILERLITE_GROUP_ID not found in environment variables. Please check your .env file.")
+            return
         logging.info(f"Attempting to subscribe {email} to group {mailerlite_group_id}")
 
         url = "https://connect.mailerlite.com/api/subscribers"
